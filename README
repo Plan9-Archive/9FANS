@@ -1,0 +1,27 @@
+9FANS - navigate a mirror of the 9fans mailing list
+
+DESCRIPTION
+	9FANS operates on a set of directories representing a mirror
+	of the 9fans mailing list archive located at http://9fans.net/archive.
+
+	9FANS omits extraneous HTML and Javascript. In an attempt to
+	preserve the formatting of the original post, the remaining content
+	is presented inside <pre> tags. In addition, each post is separated
+	by an <hr>.
+
+	Posts for each month are concatenated into a single page for
+	each month, accessed thusly:
+
+		http://plan9.stanleylieber.com/archive/1993/04/
+
+	Raw HTML of individual posts may be accessed by calling them
+	directly:
+
+		http://plan9.stanleylieber.com/archive/1993/04/1
+
+SOURCE
+	http://plan9.stanleylieber.com/werc/apps/9fans.tgz
+	https://bitbucket.org/stanleylieber/9fans
+
+DEVELOPMENT SITE
+	http://plan9.stanleylieber.com/archive

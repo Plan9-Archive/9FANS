@@ -1,0 +1,40 @@
+fn conf_enable_9fans{
+	9fans_base_uri=$conf_wd
+	9fans_root=`{pwd}
+	conf_enable_app 9fans
+}
+
+fn 9fans_build{
+	files=`{ls -p $9fans_root/$"9fans_dir | sort -n}
+	for(i in $files){
+		if(test -f $9fans_root/$"9fans_dir/$i){
+			echo '<hr><pre>'
+			9fans_handler $9fans_root/$"9fans_dir/$i
+			echo '</pre>'
+		}
+	}
+}
+
+fn 9fans_handler{
+	sed -n '15,$p' $ 1 |
+	sed '3,8d' |
+	sed 's/prev<\/a>.*next<\/a>/<\/a>/g; s/^.*<\/form>//g' |
+	fmt -j -l 82
+}
+
+fn 9fans_init{
+	p=`{echo $req_path | sed 's!^'^$9fans_base_uri^'!!'}
+	9fans_dir=`{basename -d $"p | sed 's!^\.$!!'}
+
+	if(test -d $9fans_root/$"9fans_dir \
+		&& ! test -f $9fans_root/$"9fans_dir^/index.^(md htm html tpl)){
+			handler_body_main=(tpl_handler `{9fans_template entry})
+	}
+}
+
+fn 9fans_template{
+	if(test -f $9fans_root/_werc/9fans/$1.tpl)
+		echo -n $9fans_root/_werc/9fans/$1.tpl
+	if not
+		get_lib_file 9fans/$1.tpl apps/9fans/$1.tpl
+}
